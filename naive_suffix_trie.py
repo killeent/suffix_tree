@@ -66,6 +66,15 @@ class SuffixTrieNode(object):
 		"""
 		return self.edges[label]
 
+	def edge_list(self):
+		"""
+		Return the list of edges originating in this SuffixTrieNode.
+
+		Returns:
+			the list of edges originating in this SuffixTrieNode.
+		"""
+		return self.edges.values()
+
 	def add_link(self, suffix_link):
 		"""
 		Adds an an suffix_link to this SuffixTrieNode.
@@ -138,6 +147,86 @@ def _build_suffix_trie(string):
 		deepest = deepest.get_edge(character)
 
 	return root
+
+def substring(suffix_trie, search_str):
+	"""
+	Given a suffix_trie representation of a string, determines if search_str
+	is a substring of that suffix tree'd string.
+
+	Args:
+		suffix_trie a suffix_trie representation of a tree
+		search_str the substring to search for
+
+	Returns:
+		True if search_str is a substring of suffix_trie, otherwise False.
+	"""
+
+	curr = suffix_trie
+	for c in search_str:
+		curr = suffix_trie.get_edge(c)
+		if curr is None:
+			return False
+
+	return True
+
+def suffix(suffix_trie, suffix_str):
+	"""
+	Given a suffix_trie representation of a string, determines if suffix_str
+	is a suffix of that suffix tree'd string.
+
+	Args:
+		suffix_trie a suffix_trie representation of a tree
+		suffix_str the substring to search for
+
+	Returns:
+		True if suffix_str is a suffix of suffix_trie, otherwise False.
+	"""
+
+	curr = suffix_trie
+	for c in search_str:
+		curr = suffix_trie.get_edge(c)
+		if curr is None:
+			return False
+
+	# check and see if we are leaf
+	return len(curr.edge_list()) == 0
+
+def occurences(suffix_trie, search_str):
+	"""
+	Given a suffix_trie representation of a string, returns the number of
+	occurences of search_str in the suffix_trie.
+
+	Args:
+		suffix_trie a suffix_trie representation of a tree
+		search_str the substring to search for
+
+	Returns:
+		The number of occurences of search_str in suffix_trie.
+	"""
+
+	curr = suffix_trie
+	for c in search_str:
+		curr = suffix_trie.get_edge(c)
+		if curr is None:
+			return 0
+
+	# count the number of leaves below this
+	return _get_leaves(suffix_trie)
+
+def _get_leaves(suffix_trie):
+	"""
+	Counts the number of leaves in the suffix_trie.
+
+	Args:
+		suffix_trie the root SuffixTrieNode of the suffix_trie.
+
+	Returns:
+		The number of leaves in the suffix_trie.
+	"""
+	if len(suffix_trie.edge_list()) == 0:
+		return 1
+	else:
+		return sum([_get_leaves(x) for x in suffix_trie.edge_list()])
 
 def main():
 	"""
