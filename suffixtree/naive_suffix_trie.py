@@ -29,7 +29,7 @@ class SuffixTrieNode(object):
         Constructs a new SuffixTrieNode.
 
         Args:
-            suffix_link a suffix_link for this node as described above.
+            suffix_link a suffix_link for this node as described above
         """
         self.suffix_link = suffix_link
         self.edges = {}
@@ -61,7 +61,7 @@ class SuffixTrieNode(object):
             label identifies the edge
 
         Returns:
-            the SuffixTrieNode add the end of the edge if it exists.
+            The SuffixTrieNode add the end of the edge if it exists.
         """
         return self.edges[label]
 
@@ -88,12 +88,12 @@ class SuffixTrieNode(object):
         Get the SuffixTrieNode linked to by this node.
 
         Returns:
-            the SuffixTrieNode linked to edge if it exists.
+            The SuffixTrieNode linked to edge if it exists.
         """
         return self.suffix_link
 
 
-def _build_suffix_trie(string):
+def build_suffix_trie(string):
     """
     Constructs a suffix trie from the specified string.
 
@@ -101,7 +101,7 @@ def _build_suffix_trie(string):
         string the string to construct a suffix trie from
 
     Returns:
-        a SuffixTrieNode that is the root of the constructed suffix_trie
+        A SuffixTrieNode that is the root of the constructed suffix_trie.
     """
 
     # explicitly construct root and first child
@@ -222,7 +222,7 @@ def _get_leaves(suffix_trie):
     Counts the number of leaves in the suffix_trie.
 
     Args:
-        suffix_trie the root SuffixTrieNode of the suffix_trie.
+        suffix_trie the root SuffixTrieNode of the suffix_trie
 
     Returns:
         The number of leaves in the suffix_trie.
@@ -231,13 +231,3 @@ def _get_leaves(suffix_trie):
         return 1
     else:
         return sum([_get_leaves(x) for x in suffix_trie.edge_list()])
-
-
-def main():
-    """
-    Constructs a trie, and runs some queries on it.
-    """
-    trie = _build_suffix_trie("abaaba")
-
-if __name__ == '__main__':
-    main()
