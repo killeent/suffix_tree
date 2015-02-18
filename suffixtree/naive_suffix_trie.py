@@ -10,7 +10,7 @@ class SuffixTrieNode(object):
     1. A suffix link. Suppose the node n represents some suffix "xb", where
     x is a single character and b is a sequence of characters. A suffix link
     will link to a SuffixTrieNode p representing the suffix b. So if n is
-    the string"abbaa", then it will point to a node representing the string
+    the string "abbaa", then it will point to a node representing the string
     "bbaa".
 
     Because every node in the graph represents the prefix to some suffix in
@@ -63,7 +63,8 @@ class SuffixTrieNode(object):
         Returns:
             The SuffixTrieNode add the end of the edge if it exists.
         """
-        return self.edges[label]
+        dict = {}
+        return self.edges.get(label, None)
 
     def edge_list(self):
         """
