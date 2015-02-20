@@ -58,3 +58,36 @@ class TestSubstring:
             assert naive_suffix_trie.substring(trie, val)
         for val in unexpected:
             assert not naive_suffix_trie.substring(trie, val)
+
+            
+class TestSuffix:
+
+    def test_suffix_empty_trie(self):
+        """
+        Tests suffix operations on an empty trie.
+        """
+        trie = naive_suffix_trie.build_suffix_trie('')
+        assert naive_suffix_trie.suffix(trie, '')
+        assert not naive_suffix_trie.suffix(trie, 'a')
+
+    def test_suffix_single_element_trie(self):
+        """
+        Tests suffix operations on a single element trie.
+        """
+        trie = naive_suffix_trie.build_suffix_trie('a')
+        assert naive_suffix_trie.suffix(trie, '')
+        assert naive_suffix_trie.suffix(trie, 'a')
+        assert not naive_suffix_trie.suffix(trie, 'b')
+
+    def test_suffix_multi_element_trie(self):
+        """
+        Tests suffix operations on a multi-element trie.
+        """
+        trie = naive_suffix_trie.build_suffix_trie('abba')
+        expected = ['', 'a', 'ba', 'bba', 'abba']
+        unexpected = ['ab', 'abb']
+        for val in expected:
+            assert naive_suffix_trie.suffix(trie, val)
+        for val in unexpected:
+            assert not naive_suffix_trie.suffix(trie, val)
+
