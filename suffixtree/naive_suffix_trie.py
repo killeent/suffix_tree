@@ -139,9 +139,12 @@ def build_suffix_trie(string):
 
         # if curr is not None, then the current node already contains the
         # specified character as an edge, so we must update the
-        # suffix_link of prev to point to that edge
+        # suffix_link of prev to point to that edge. Otherwise, add an link
+        # from curr to the root
         if curr is not None:
             prev.suffix_link = curr.get_edge(character)
+        else:
+            prev.suffix_link = root
 
         # update the deepest node in the trie to be the child of
         # the previous deepest node

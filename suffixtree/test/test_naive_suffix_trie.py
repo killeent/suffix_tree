@@ -26,13 +26,6 @@ class TestBuildSuffixTrie:
         """
         naive_suffix_trie.build_suffix_trie('abc')
 
-    def test_build_trie_breakage(self):
-        """
-        todo: fix the cause of this breaking test
-        """
-        trie = naive_suffix_trie.build_suffix_trie('abba')
-        assert trie.get_edge('b').contains_edge('a')
-
 
 class TestSubstring:
 
@@ -54,14 +47,14 @@ class TestSubstring:
         assert not naive_suffix_trie.substring(trie, 'b')
         assert not naive_suffix_trie.substring(trie, 'ab')
 
-    # def test_substring_multi_element_trie(self):
-    #     """
-    #     Tests substring operations on a multi-element trie.
-    #     """
-    #     trie = naive_suffix_trie.build_suffix_trie('abba')
-    #     expected = ['', 'a', 'ab', 'abb', 'abba', 'b', 'bb', 'bba', 'ba']
-    #     unexpected = ['aba', 'aa', 'abbaa']
-    #     for val in expected:
-    #         assert naive_suffix_trie.substring(trie, val)
-    #     for val in unexpected:
-    #         assert not naive_suffix_trie.substring(trie, val)
+    def test_substring_multi_element_trie(self):
+        """
+        Tests substring operations on a multi-element trie.
+        """
+        trie = naive_suffix_trie.build_suffix_trie('abba')
+        expected = ['', 'a', 'ab', 'abb', 'abba', 'b', 'bb', 'bba', 'ba']
+        unexpected = ['aba', 'aa', 'abbaa']
+        for val in expected:
+            assert naive_suffix_trie.substring(trie, val)
+        for val in unexpected:
+            assert not naive_suffix_trie.substring(trie, val)
